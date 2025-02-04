@@ -2,13 +2,17 @@ version: '3'
 services:
   apollo-router:
     container_name: apollo-router
-    image: ghcr.io/apollographql/router:v1.59.2
+    image: ghcr.io/apollographql/router:v2.0.0-preview.0
+    environment:
+      APOLLO_KEY: "service::"
+      APOLLO_GRAPH_REF: "@current"
     volumes:
       - ./supergraph.graphql:/dist/schema/supergraph.graphql
       - ./router.yaml:/dist/config/router.yaml
     command: [ "--dev", "-c", "config/router.yaml", "-s", "schema/supergraph.graphql", "--log", "info" ]
     ports:
       - "4000:4000"
+    privileged: true
   products:
     container_name: products
     build: ./subgraphs/products
@@ -21,3 +25,15 @@ services:
   pandas:
     container_name: pandas
     build: ./subgraphs/pandas
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./data/:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - ./logs:/logs
+      command: redis-server /usr/local/etc/redis/redis.conf
+      privileged: true
