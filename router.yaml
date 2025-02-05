@@ -3,13 +3,13 @@ apq:
   router:
     cache:
       redis:
-        urls: [""redis://redis:6379]
+        urls: ["redis://redis:6379"]
 supergraph:
   listen: 0.0.0.0:4000
   query_planning:
     cache:
       redis:
-        urls: [""redis://redis:6379]
+        urls: ["redis://redis:6379"]
         timeout: 2s
         required_to_start: true
 cors:
