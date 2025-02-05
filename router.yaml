@@ -49,7 +49,7 @@ telemetry:
   exporters:
     tracing:
       otlp:
-        endpoint: "http://${env.APOLLO_OTEL_EXPORTER_HOST:localhost}:4317"
+        endpoint: "http://${env.APOLLO_OTEL_EXPORTER_HOST:-localhost}:4317"
         protocol: grpc
         batch_processor:
           max_export_timeout: 42s
