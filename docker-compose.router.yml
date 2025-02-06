@@ -26,7 +26,7 @@ services:
     container_name: pandas
     build: ./subgraphs/pandas
   redis:
-    image: redis:latest
+    image: redis:7.4.2
     container_name: redis
     restart: always
     ports:
