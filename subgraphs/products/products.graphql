@@ -1,3 +1,7 @@
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.7",
+        import: ["@key"])
+
 directive @tag(name: String!) repeatable on FIELD_DEFINITION
 
 type Product @key(fields: "id") @key(fields: "sku package") @key(fields: "sku variation { id }"){
